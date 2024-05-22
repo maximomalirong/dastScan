@@ -11,6 +11,7 @@ class commonFunctions {
 
                     cy.writeFile('logs/'+ menu + '/statusCode_' + date + '.text',
                     endpoints[i].response.url + "\n" +
+                    'contentType: ' + endpoints[i].response.headers['content-type'] + "\n" +
                     'statusCode: ' + endpoints[i].response.statusCode,
                     );
                 }

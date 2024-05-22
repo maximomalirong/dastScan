@@ -8,15 +8,14 @@ const cwa = new commonWebActions
 const cf = new commonFunctions
 const rd = new resourceData
 
-let menu = 'dastScan';
+let menu = 'customLink';
 
 describe('Sign up', () => {
     it ('End to End testing for Accessline Sign-up', () => {
-        cwa.openWebPage();
-        cy.wait(5000);
         cy.log('Start of end to end testing...');
         cy.intercept({ resourceType: /xhr|fetch/ }).as('dastScan')
-        cy.wait(120000);
+        cwa.openCustomWebPage();
+        cy.wait(50000);
         cy.log('End of end to end testing...');
         cf.checkXhrRequests('@dastScan.all', menu);
     })

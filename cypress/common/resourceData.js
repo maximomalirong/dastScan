@@ -2,16 +2,18 @@
 
 class resourceData {
 
-    plAdminUser = 'AutoUser1';
     plAdminPassword = 'test1234';
     smsCode = '999999';
 
-    //clientUserName = 'Josie.McCoole';
+    /*Administrator Users */
+    plAdminUser = 'AutoUser1';
+    amexBppAdminUser = 'amexbppadmin'
 
-    /*Rewards */
-    clientUserName = 'Bwoods15';
-
+    /*Client Users */
+    clientUserName = 'Josie.McCoole';
+    //clientUserName = 'Bwoods15'; //with Rewards
     //clientUserName = 'Impressldc'
+    amexBppClientUser = 'peter.douglas@belleproperty.com';
 
     
     //Login Page

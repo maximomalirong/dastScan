@@ -19,5 +19,15 @@ describe('Account Recovery', () => {
         cf.checkXhrRequests('@search.all');
     })
 
+    it.only ('Access Line Forgot Password', () => {
+        cwa.openWebPage();
+        cy.wait(5000);
+        cy.log('Start of end to end testing...');
+        cy.intercept({ resourceType: /xhr|fetch/ }).as('search');
+        cy.wait(30000);
+        cy.log('End of end to end testing...');
+        cf.checkXhrRequests('@search.all');
+    })
+
 
 })

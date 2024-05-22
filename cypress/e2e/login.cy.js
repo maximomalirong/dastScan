@@ -8,27 +8,27 @@ const cwa = new commonWebActions
 const cf = new commonFunctions
 const rd = new resourceData
 
-let menu = 'createPayment';
+let menu = 'login';
 
-describe('Create Payments', () => {
-    it ('Payment Logic - End to End testing for Create Payment', () => {
+describe('Login', () => {
+    it ('Payment Logic - End to End testing for Login', () => {
         cwa.openWebPage();
+        cy.wait(20000);
+        cy.log('Start of end to end testing...');
+        cy.intercept({ resourceType: /xhr|fetch/ }).as('dastScan')
         cwa.loginWebPage(rd.clientUserName, rd.plAdminPassword, rd.smsCode);
         cy.wait(20000);
-        cy.intercept({ resourceType: /xhr|fetch/ }).as('dastScan')
-        cy.log('Start of end to end testing...');
-        cy.wait(90000);
         cy.log('End of end to end testing...');
         cf.checkXhrRequests('@dastScan.all', menu);
     })
 
-    it.only ('Access Line - End to End testing for Create Payment', () => {
+    it.only ('Access Line - End to End testing for Login', () => {
         cwa.openWebPage();
+        cy.wait(20000);
+        cy.log('Start of end to end testing...');
+        cy.intercept({ resourceType: /xhr|fetch/ }).as('dastScan')
         cwa.loginWebPage(rd.amexBppClientUser, rd.plAdminPassword, rd.smsCode);
         cy.wait(20000);
-        cy.intercept({ resourceType: /xhr|fetch/ }).as('dastScan')
-        cy.log('Start of end to end testing...');
-        cy.wait(90000);
         cy.log('End of end to end testing...');
         cf.checkXhrRequests('@dastScan.all', menu);
     })

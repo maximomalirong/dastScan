@@ -17,12 +17,17 @@ class commonWebActions {
         cy.visit(Cypress.env('webBaseUrl'), {timeout: 20000})
     }
 
+    openCustomWebPage() {
+        cy.viewport(1920, 1280);
+        cy.visit(Cypress.env('customLink'), {timeout: 20000})
+    }
+
     loginWebPage(email, password, smsCode) {
         //Login Page
         cy.get(rd.inputFieldUserName).clear().type(email);
         cy.get(rd.inputFieldPassword).clear().type(password);
         cy.get(rd.buttonLogin).click();
-        cy.wait(5000);
+        cy.wait(8000);
 
         //MFA Page
         cy.get(rd.textPaymentLogic).click();
