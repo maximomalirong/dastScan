@@ -44,6 +44,36 @@ class commonFunctions {
         })
     }
 
+    checkHppXhrRequests(arbitrary, menu) {
+        cy.get(arbitrary).then((endpoints) => {
+            for (let i = 0; i < endpoints.length; i++) {
+                const date = Date.now()
+
+                if (endpoints[i].response.statusCode != 200) {
+
+                    cy.writeFile('logs/'+ menu + '/statusCode_' + date + '.text',
+                    endpoints[i].response.url + "\n" +
+                    'contentType: ' + endpoints[i].response.headers['content-type'] + "\n" +
+                    'statusCode: ' + endpoints[i].response.statusCode,
+                    );
+                }
+                
+
+                if (endpoints[i].response.headers['access-control-allow-origin'] != Cypress.env('hostname')) {
+                    cy.log('CSP is present')
+                }
+                else {
+                    cy.writeFile('logs/'+ menu + '/' + date + '.text',
+                    endpoints[i].response.url + "\n" +
+                    'contentType: ' + endpoints[i].response.headers['content-type'] + "\n" +
+                    'content-security-policy: ' + endpoints[i].response.headers['content-security-policy']
+                    )
+                }
+ 
+            }
+        })
+    }
+
     generateRandomAbn() {
         var randomAbn = '';
 
