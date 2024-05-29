@@ -2,3 +2,4 @@
 node_modules/
 logs/
 cypress/downloads/
+cypress/e2e/sample.cy.js

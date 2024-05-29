@@ -28,7 +28,7 @@ describe('Create Payments', () => {
         cy.wait(20000);
         cy.log('Start of end to end testing...');
         cy.intercept({ resourceType: /xhr|fetch/ }).as('dastScan')
-        cy.wait(90000);
+        cy.wait(200000);
         cy.log('End of end to end testing...');
         cf.checkXhrRequests('@dastScan.all', menu);
     })

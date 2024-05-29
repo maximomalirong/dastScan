@@ -10,10 +10,12 @@ class resourceData {
     amexBppAdminUser = 'amexbppadmin'
 
     /*Client Users */
-    clientUserName = 'Josie.McCoole';
+    clientUserName = 'miraidemasupil'
+    //clientUserName = 'Josie.McCoole';
     //clientUserName = 'Bwoods15'; //with Rewards
     //clientUserName = 'Impressldc'
     amexBppClientUser = 'peter.douglas@belleproperty.com';
+    //amexBppClientUser = 'elandco1';
 
     
     //Login Page
