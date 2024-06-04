@@ -11,7 +11,7 @@ const rd = new resourceData
 let menu = 'login';
 
 describe('Login', () => {
-    it.only ('Payment Logic - End to End testing for Login', () => {
+    it ('Payment Logic - End to End testing for Login', () => {
         cwa.openWebPage();
         cy.wait(20000);
         cy.log('Start of end to end testing...');
@@ -33,7 +33,7 @@ describe('Login', () => {
         cf.checkXhrRequests('@dastScan.all', menu);
     })
 
-    it ('Access Line - End to End testing for Login using Administrator user', () => {
+    it.only ('Access Line - End to End testing for Login using Administrator user', () => {
         cwa.openWebPage();
         cy.wait(20000);
         cy.log('Start of end to end testing...');

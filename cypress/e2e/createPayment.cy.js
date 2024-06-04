@@ -11,18 +11,18 @@ const rd = new resourceData
 let menu = 'createPayment';
 
 describe('Create Payments', () => {
-    it ('Payment Logic - End to End testing for Create Payment', () => {
+    it.only ('Payment Logic - End to End testing for Create Payment', () => {
         cwa.openWebPage();
         cwa.loginWebPage(rd.clientUserName, rd.plAdminPassword, rd.smsCode);
         cy.wait(20000);
         cy.intercept({ resourceType: /xhr|fetch/ }).as('dastScan')
         cy.log('Start of end to end testing...');
-        cy.wait(90000);
+        cy.wait(150000);
         cy.log('End of end to end testing...');
         cf.checkXhrRequests('@dastScan.all', menu);
     })
 
-    it.only ('Access Line - End to End testing using Client Admin user ', () => {
+    it ('Access Line - End to End testing using Client Admin user ', () => {
         cwa.openWebPage();
         cwa.loginWebPage(rd.amexBppClientUser, rd.plAdminPassword, rd.smsCode);
         cy.wait(20000);

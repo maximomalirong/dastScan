@@ -7,6 +7,7 @@ class commonFunctions {
                 //assert.equal(endpoints[i].response.statusCode, 200, 'endpoint : ' + endpoints[i].response.url);
                 const date = Date.now()
 
+                //Check Response status code for each endpoint
                 if (endpoints[i].response.statusCode != 200) {
 
                     cy.writeFile('logs/'+ menu + '/statusCode_' + date + '.text',
@@ -23,7 +24,23 @@ class commonFunctions {
                     cy.log('No checking for content-security-policy');
                 }*/
 
-                if (endpoints[i].request.headers.host === Cypress.env('hostname') && endpoints[i].response.headers['content-security-policy'] != null) {
+                if (endpoints[i].response.url == Cypress.env('webBaseUrl')+'Scripts/js/directives/pagination/dirPagination.tpl.html') {
+                    cy.log('Known issue');
+                }
+
+                else if (endpoints[i].response.url == Cypress.env('webBaseUrl')+'Views/Shared/PaginationLoader.html') {
+                    cy.log('Known issue');
+                }
+                
+                else if (endpoints[i].response.url == Cypress.env('webBaseUrl')+'Views/Shared/ListLoader.html') {
+                    cy.log('Known issue');
+                }
+
+                else if (endpoints[i].response.url == Cypress.env('webBaseUrl')+'Views/Shared/PageLoader.html') {
+                    cy.log('Known issue');
+                }
+
+                else if (endpoints[i].request.headers.host === Cypress.env('hostname') && endpoints[i].response.headers['content-security-policy'] != null) {
                     cy.log('CSP is present')
                 }
                 

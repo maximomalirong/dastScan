@@ -6,12 +6,13 @@ class resourceData {
     smsCode = '999999';
 
     /*Administrator Users */
-    plAdminUser = 'AutoUser1';
-    amexBppAdminUser = 'amexbppadmin'
+    plAdminUser = 'maximomalirong';
+    password = 'test12345';
+    amexBppAdminUser = 'amexbppadmin';
 
     /*Client Users */
-    clientUserName = 'miraidemasupil'
-    //clientUserName = 'Josie.McCoole';
+    //clientUserName = 'miraidemasupil'
+    clientUserName = 'Josie.McCoole';
     //clientUserName = 'Bwoods15'; //with Rewards
     //clientUserName = 'Impressldc'
     amexBppClientUser = 'peter.douglas@belleproperty.com';
