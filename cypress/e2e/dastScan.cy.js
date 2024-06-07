@@ -9,15 +9,18 @@ const cf = new commonFunctions
 const rd = new resourceData
 
 let menu = 'dastScan';
+let environment = cf.generateEnvironmentUrl();
+let webBaseUrl = environment.webBaseUrl;
+let hostname = environment.hostname;
 
 describe('Sign up', () => {
     it ('End to End testing for Accessline Sign-up', () => {
-        cwa.openWebPage();
+        cwa.openWebPage(webBaseUrl);
         cy.wait(5000);
         cy.log('Start of end to end testing...');
         cy.intercept({ resourceType: /xhr|fetch/ }).as('dastScan')
-        cy.wait(90000);
+        cy.wait(20000);
         cy.log('End of end to end testing...');
-        cf.checkXhrRequests('@dastScan.all', menu);
+        cf.checkXhrRequests('@dastScan.all', webBaseUrl, hostname, menu);
     })
 })

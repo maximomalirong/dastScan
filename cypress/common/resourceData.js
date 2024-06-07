@@ -7,14 +7,14 @@ class resourceData {
 
     /*Administrator Users */
     plAdminUser = 'maximomalirong';
-    password = 'test12345';
+    password = 'maximo1990maximo';
     amexBppAdminUser = 'amexbppadmin';
 
     /*Client Users */
     //clientUserName = 'miraidemasupil'
-    clientUserName = 'Josie.McCoole';
+    //clientUserName = 'Josie.McCoole';
     //clientUserName = 'Bwoods15'; //with Rewards
-    //clientUserName = 'Impressldc'
+    clientUserName = 'Impressldc'
     amexBppClientUser = 'peter.douglas@belleproperty.com';
     //amexBppClientUser = 'elandco1';
 

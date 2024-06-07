@@ -12,14 +12,14 @@ class commonWebActions {
         this.loginWebPage(rd.plAdminUser, rd.plAdminPassword, rd.smsCode);
     }
 
-    openWebPage() {
+    openWebPage(webBaseUrl) {
         cy.viewport(1920, 1280);
-        cy.visit(Cypress.env('webBaseUrl'), {timeout: 20000})
+        cy.visit(webBaseUrl, {timeout: 20000})
     }
 
-    openCustomWebPage() {
+    openCustomWebPage(customLink) {
         cy.viewport(1920, 1280);
-        cy.visit(Cypress.env('customLink'), {timeout: 20000})
+        cy.visit(customLink, {timeout: 20000})
     }
 
     loginWebPage(email, password, smsCode) {

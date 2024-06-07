@@ -1,10 +1,9 @@
 /// <reference types="cypress" />
 
 class commonFunctions {
-    checkXhrRequests(arbitrary, menu) {
+    checkXhrRequests(arbitrary, webBaseUrl, hostname, menu) {
         cy.get(arbitrary).then((endpoints) => {
             for (let i = 0; i < endpoints.length; i++) {
-                //assert.equal(endpoints[i].response.statusCode, 200, 'endpoint : ' + endpoints[i].response.url);
                 const date = Date.now()
 
                 //Check Response status code for each endpoint
@@ -17,35 +16,37 @@ class commonFunctions {
                     );
                 }
                 
-                /*if (endpoints[i].request.headers.host === Cypress.env('hostname') && endpoints[i].response.headers['content-type'] != 'application/x-javascript')
-                {
-                    expect(endpoints[i].response.headers).to.have.property('content-security-policy');
-                } else {
-                    cy.log('No checking for content-security-policy');
-                }*/
-
-                if (endpoints[i].response.url == Cypress.env('webBaseUrl')+'Scripts/js/directives/pagination/dirPagination.tpl.html') {
+                /*Checking Content Security Policy in Response Header */
+                if (endpoints[i].response.url == webBaseUrl + 'Scripts/js/directives/pagination/dirPagination.tpl.html') {
                     cy.log('Known issue');
                 }
 
-                else if (endpoints[i].response.url == Cypress.env('webBaseUrl')+'Views/Shared/PaginationLoader.html') {
+                else if (endpoints[i].response.url == webBaseUrl + 'Views/Shared/PaginationLoader.html') {
                     cy.log('Known issue');
                 }
                 
-                else if (endpoints[i].response.url == Cypress.env('webBaseUrl')+'Views/Shared/ListLoader.html') {
+                else if (endpoints[i].response.url == webBaseUrl + 'Views/Shared/ListLoader.html') {
                     cy.log('Known issue');
                 }
 
-                else if (endpoints[i].response.url == Cypress.env('webBaseUrl')+'Views/Shared/PageLoader.html') {
+                else if (endpoints[i].response.url == webBaseUrl + 'Views/Shared/Loader.html') {
+                    cy.log('Known issue');
+                }
+                
+                else if (endpoints[i].response.url == webBaseUrl + 'Views/Shared/PageLoader.html') {
+                    cy.log('Known issue');
+                }
+                
+
+                else if (endpoints[i].response.url == webBaseUrl + 'Scripts/l10n/en_AU.js') {
                     cy.log('Known issue');
                 }
 
-                else if (endpoints[i].request.headers.host === Cypress.env('hostname') && endpoints[i].response.headers['content-security-policy'] != null) {
+                else if (endpoints[i].request.headers.host === hostname && endpoints[i].response.headers['content-security-policy'] != null) {
                     cy.log('CSP is present')
                 }
                 
-                //else if (endpoints[i].request.headers.host === Cypress.env('hostname') && endpoints[i].response.headers['content-type'] != "text/html")
-                else if (endpoints[i].request.headers.host === Cypress.env('hostname'))
+                else if (endpoints[i].request.headers.host === hostname)
                 {
                     cy.writeFile('logs/'+ menu + '/' + date + '.text',
                     endpoints[i].response.url + "\n" +
@@ -61,7 +62,7 @@ class commonFunctions {
         })
     }
 
-    checkHppXhrRequests(arbitrary, menu) {
+    checkHppXhrRequests(arbitrary, webBaseUrl, hostname,) {
         cy.get(arbitrary).then((endpoints) => {
             for (let i = 0; i < endpoints.length; i++) {
                 const date = Date.now()
@@ -76,7 +77,7 @@ class commonFunctions {
                 }
                 
 
-                if (endpoints[i].response.headers['access-control-allow-origin'] != Cypress.env('hostname')) {
+                if (endpoints[i].response.headers['access-control-allow-origin'] != hostname) {
                     cy.log('CSP is present')
                 }
                 else {
@@ -154,6 +155,155 @@ class commonFunctions {
         var stringYear = expiryYear.toString()
         var last2 = stringYear.substring(stringYear.length - 2)
         return last2
+    }
+
+    generateEnvironmentUrl(applicationTheme) {
+        //STG environment
+        if (Cypress.env('testingEnvironment') == "STG") {
+            //Payment Logic
+            if (applicationTheme == "PL") {
+                return {
+                    webBaseUrl : Cypress.env('paymentlogicUrlSTG'),
+                    hostname : Cypress.env('paymentlogicHostnameSTG'),
+                }
+            }
+
+            //YakPay
+            else if (applicationTheme == "YP") {
+                return {
+                    webBaseUrl : Cypress.env('yakpayUrlSTG'),
+                    hostname : Cypress.env('yakpayHostnameSTG'),
+                }
+            }
+
+            //APS
+            else if (applicationTheme == "APS") {
+                return {
+                    webBaseUrl : Cypress.env(''),
+                    hostname : Cypress.env(''),
+                }
+            }
+
+            //Access Line
+            else if (applicationTheme == "BPP") {
+                return {
+                    webBaseUrl : Cypress.env('accesslineUrlSTG'),
+                    hostname : Cypress.env('accesslineHostnameSTG'),
+                }
+            }
+
+            //HPP
+            else if (applicationTheme == "HPP") {
+                return {
+                    webBaseUrl : Cypress.env(''),
+                    hostname : Cypress.env('hppHostnameSTG'),
+                }
+            }
+            
+            else {
+                cy.log('Incorrect application configuration');
+            }
+        }
+
+        //TST environment
+        else if (Cypress.env('testingEnvironment') == "TST") {
+            //Payment Logic
+            if (applicationTheme == "PL") {
+                return {
+                    webBaseUrl : Cypress.env('paymentlogicUrlTST'),
+                    hostname : Cypress.env('paymentlogicHostnameTST'),
+                }
+            }
+
+            //YakPay
+            else if (applicationTheme == "YP") {
+                return {
+                    webBaseUrl : Cypress.env('yakpayUrlTST'),
+                    hostname : Cypress.env('yakpayHostnameTST'),
+                }
+            }
+
+            //APS
+            else if (applicationTheme == "APS") {
+                return {
+                    webBaseUrl : Cypress.env(''),
+                    hostname : Cypress.env(''),
+                }
+            }
+
+            //Access Line
+            else if (applicationTheme == "BPP") {
+                return {
+                    webBaseUrl : Cypress.env('accesslineUrlTST'),
+                    hostname : Cypress.env('accesslineHostnameTST'),
+                }
+            }
+
+            //HPP
+            else if (applicationTheme == "HPP") {
+                return {
+                    webBaseUrl : Cypress.env(''),
+                    hostname : Cypress.env('hppHostnameTST'),
+                }
+            }
+            
+            else {
+                cy.log('Incorrect application configuration');
+                return null;
+            }
+        }
+
+        //CODEDUI environment
+        else if (Cypress.env('testingEnvironment') == "CUIT") {
+            //Payment Logic
+            if (applicationTheme == "PL") {
+                return {
+                    webBaseUrl : Cypress.env('paymentlogicUrlCUIT'),
+                    hostname : Cypress.env('paymentlogicHostnameCUIT'),
+                }
+            }
+
+            //YakPay
+            else if (applicationTheme == "YP") {
+                return {
+                    webBaseUrl : Cypress.env('yakpayUrlCUIT'),
+                    hostname : Cypress.env('yakpayHostnameCUIT'),
+                }
+            }
+
+            //APS
+            else if (applicationTheme == "APS") {
+                return {
+                    webBaseUrl : Cypress.env(''),
+                    hostname : Cypress.env(''),
+                }
+            }
+
+            //Access Line
+            else if (applicationTheme == "BPP") {
+                return {
+                    webBaseUrl : Cypress.env('accesslineUrlCUIT'),
+                    hostname : Cypress.env('accesslineHostnameCUIT'),
+                }
+            }
+
+            //HPP
+            else if (applicationTheme == "HPP") {
+                return {
+                    webBaseUrl : Cypress.env(''),
+                    hostname : Cypress.env('hppHostnameCUIT'),
+                }
+            }
+            
+            else {
+                cy.log('Incorrect application configuration');
+                return null;
+            }
+        }
+
+        else {
+            cy.log('Incorrect test environment configuration');
+        }
     }
 }
 
